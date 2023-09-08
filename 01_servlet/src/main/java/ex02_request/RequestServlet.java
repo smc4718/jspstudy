@@ -44,7 +44,7 @@ public class RequestServlet extends HttpServlet {
 	  String strAge = request.getParameter("age");
 	  
 	  // 3. 요청 파라미터의 타입을 조정한다.
-	  //   타입을 조정할 때 Exception이 발생하지 않도록 요청 파라미터의 null 처리가 필요하다.
+	  //   타입을 조정할 때 Exception이 발생하지 않도록 요청 파라미터의 [null 처리 + 빈 문자열 처리]가 필요하다.
 	  
 	  //  1) 고전 null 처리
 	  /*
@@ -56,10 +56,17 @@ public class RequestServlet extends HttpServlet {
 	  
 	  // 2) null 처리를 위한 java.util.Optional 클래스 (최신)
 	  // Optional = 값이 없을 때 (Null값일 때), 대신 쓸 수 있는 값을 준다.
+	  /*
 	  Optional<String> opt = Optional.ofNullable(strAge);
 	  int age = Integer.parseInt(opt.orElse("0")); // opt로 감싼 strAge가 null이면 "0"을 꺼낸다.
+	  */
 	  
-	  System.out.println(name + ' ' + age);
+	  // null 처리 + 빈 문자열 처리
+	  int age = 0;
+	  if(strAge != null && !strAge.isEmpty()) {
+	    age = Integer.parseInt(strAge);
+	  }
+	  System.out.println(name + ',' + age);
 
 	}
 	
