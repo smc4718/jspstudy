@@ -1,0 +1,9 @@
+<!-- 서블릿의 URLMapping 바꾸기 -->
+<servlet>
+    <servlet-class>ex01_lifecycle.HelloServlet</sevlet-class>
+    <servlet-name>channel</servlet-name>
+</servlet>
+<servlet-mapping>
+    <servlet-name>channel</servlet-name>
+    <url-pattern>/hello</url-pattern>
+</servlet-mapping>
