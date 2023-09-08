@@ -3,14 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
 
   <!-- 1. <a> 태그 요청하기 -->
   <div>
-    <a href="/servlet/request?name=alice">요청하기</a>  
+    <a href="/servlet/request?name=alice&age=30">요청하기</a>  
     <!-- name이라는 파라미터에 alice라는 값을 받아서 보낸다. -->
+    <!-- 모든 파라미터는 String 타입이다. int(정수)로 보낼 수 없음 -->
+    <!-- 한글로 적으면 안가짐, 파라미터는 인코딩이 필요하다. -->
   </div>
+  
+  <hr>
+  
+  <!-- 2. location.href 속성 요청하기 (이벤트는 다 이 Get방식으로 사용) -->
+  <div>
+    <span>james</span>
+    <button id="btn">요청하기</button>
+  <span>40</span>
+  </div>
+  <script>
+    $('#btn').click(function(){
+      var name = $(this).prev().text();
+      var age  = $(this).next().text();
+      location.href = '/servlet/request?name=' + name + '&age=' + age;
+    })
+  </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 </body>
 </html>
