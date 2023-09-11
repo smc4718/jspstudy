@@ -43,6 +43,41 @@
       })
     })
   </script>
+  
+  <hr>
+  
+  <div>
+    <form id="frm">
+      <div>
+        <input type="text" name="title" placeholder="제목">
+      </div>
+      <div>
+        <input type="text" name="writer" placeholder="작성자">
+      </div>
+		  <div>
+		    <button type="button" id="btn2">JSON요청</button>
+		  </div>
+		</form>
+		<div id="content2"></div>
+	</div>
+  <script>
+    $('#btn2').click(function(){
+      $.ajax({
+        type: 'get',
+        url: '/servlet/getJSON',
+        data: $('#frm').serialize(),  // <form> 태그의 모든 입력 요소들을 파라미터로 보낸다. 이 때 입력 요소들은 name 속성을 가지고 있어야 한다.
+                    // .serialize() = 직렬화(파라미터들을 한 줄로 줄세움)
+        /*  */
+        dataType: 'json',
+        success: function(resData){
+          
+        },
+        error: function(jqXHR){
+          alert(jqXHR.status + '(' + jqXHR.statusText + ')');
+        }
+      })              
+    })
+  </script>
 
 </body>
 </html>
