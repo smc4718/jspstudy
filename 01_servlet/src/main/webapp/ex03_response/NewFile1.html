@@ -7,8 +7,11 @@
 <body>
 
  <!-- 모든 입력요소는 form 안에 있어야 전송이 된다. -->
+ 
+ <!-- 요청이 get과 post인걸 구분하지 말고 모든 코드 작성은 doGet()에 가서 하면 된다. -->
+ <!-- doPost()로 데이터가 가도 거기서 doGet()을 호출하기 떄문. -->
   <div>
-    <form method="get" action="/servlet/response">
+    <form method="post" action="/servlet/response">
     <div>
       <input type="radio" name="gender" value="man" id="man">
       <label for="man">남자</label>

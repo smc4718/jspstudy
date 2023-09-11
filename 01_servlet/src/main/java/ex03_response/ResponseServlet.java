@@ -91,6 +91,8 @@ public class ResponseServlet extends HttpServlet {
 	  out.close();  // 출력스트림은 내보내고 반드시 닫아줘야 한다.
 	  
 	  
+	  // 주소창에 파라미터를 변경하는 것을 "POST" 라고 함
+	  
 	}
 
 	/**
