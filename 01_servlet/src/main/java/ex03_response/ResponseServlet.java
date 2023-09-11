@@ -59,7 +59,36 @@ public class ResponseServlet extends HttpServlet {
 	  response.setContentType("text/html; charset=UTF-8");
 	  
 	  // 4. 응답 스트림 생성 (서버에서 내보내는 것이니, 출력스트림이다. 문자기반의 출력스트림인 Writer 생성)
-	   
+	  //    IOException 예외 처리가 필요하지만 doGet() 메소드는 IOException 처리를 이미 하고 있다. (throws로 예외처리를 다른 곳으로 던지고 있다.)
+	  PrintWriter out = response.getWriter();
+	  
+	  // 5. 응답하기 (온전한 웹 페이지)
+	  // PrintWriter를 쓰는 이유는 Println() : '출력 후 줄바꿈'을 쓰기 위해서이다.
+	  out.println("<!DOCTYPE html>");
+	  out.println("<html lang=\"ko\">");
+	  out.println("<head>");
+	  out.println("<meta charset=\"UTF-8\">");
+	  out.println("<title>페이지제목</title>");
+	  out.println("<style>");
+	  out.println(".wrap {");
+	  out.println(" background-color: #a0a0a0;");
+	  out.println("}");	  
+	  out.println("</style>");
+	  out.println("</head>");
+	  out.println("<body>");
+	  out.println("<div class=\"wrap\">");
+	  out.println("<h1>요청 파라미터</h1>");
+	  out.println("<ul>");
+	  out.println("<li>성별: " + gender + "</li>");
+	  out.println("<li>도메인: " + domain + "</li>");
+	  out.println("<li><pre>" + content + "</pre></li>");
+	  out.println("<li>지역: " + region + "</li>");
+	  out.println("</ul>");
+	  out.println("</div>");
+	  out.println("</body>");
+	  out.println("</html>");
+	  out.flush();  // 출력스트림 안에 남아 있는 것이 있으면 다 밀어낸다.
+	  out.close();  // 출력스트림은 내보내고 반드시 닫아줘야 한다.
 	  
 	  
 	}
