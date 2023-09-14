@@ -12,4 +12,10 @@ $('.gnb a').mouseover(function(){
 $('.gnb a').mouseout(function(){
   $(this).css('background-color', '');
   })
+
+  var img = new Image();
+  $(img).attr('src', '/jsp/resource/image/naver.png');
+  $(img).css('width', '150px');
+  $('.logo').html(img);
+  
 })
