@@ -14,7 +14,7 @@
 <body>
 
   <nav class="gnb">
-    <div class="logo"><img src="../../"></div>
+    <div class="logo"></div>
     <ul>
       <li><a href="main1.jsp">main1</a></li>
       <li><a href="main2.jsp">main2</a></li>
