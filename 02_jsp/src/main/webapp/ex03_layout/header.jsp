@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="/jsp/resource/css/main.css?dt=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="/jsp/resource/css/footer.css?dt=<%=System.currentTimeMillis()%>">
 </head>
-<body>s
+<body>
 
   <nav class="gnb">
     <div class="logo"></div>
