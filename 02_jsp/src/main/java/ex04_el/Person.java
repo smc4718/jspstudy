@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor     //아규먼츠가 없는 생성자
-@AllArgsConstructor    //모든 아규먼츠가 있는 생성자
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Person {
