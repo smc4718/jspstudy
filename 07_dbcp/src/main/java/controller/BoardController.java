@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.ActionForward;
+
 /**
  * Servlet implementation class BoardController
  */
@@ -39,11 +41,26 @@ public class BoardController extends HttpServlet {
 	  String urlMapping  = requestURI.substring(contextPath.length());
 	  
 	  // 어디로 어떻게 이동할 것인지 알고 있는 ActionForward 객체
+	  ActionForward af = null;
 	  
+	  // 요청에 따른 처리
+	  switch(urlMapping) {
+	  // 단순 이동
+	  case "/board/list.do":
+	    af = new ActionForward("/board/list.jsp", false);
+	    break;
+	  // 서비스 처리
+	    
+	  }
 	  
-	  
-	  
-	  
+	  // 이동
+	  if(af != null) {
+	    if(af.isRedirect()) {
+	      response.sendRedirect(af.getPath());
+	    } else {
+	      request.getRequestDispatcher(af.getPath()).forward(request, response);
+	    }
+	  }
 	  
 	}
 
