@@ -11,13 +11,17 @@
 </head>
 <body>
 
-<c:if test="${today != null}">
-  ${today}
-</c:if>
-
-<c:if test="${now != null}">
-  ${now}
-</c:if>
+  <div>
+    <form method="get" action="${contextPath}/getAge.do">
+      <label for="year">태어난년도</label>
+      <select name="year" id="year">
+        <c:forEach var="y" begin="1970" end="2023" step="1">
+          <option>${y}</option>
+        </c:forEach>
+      </select>
+      <button type="submit">몇 살인지 알려주세요</button>
+    </form>
+  </div>
 
 </body>
 </html>
