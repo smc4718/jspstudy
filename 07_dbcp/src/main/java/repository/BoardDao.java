@@ -20,7 +20,7 @@ public class BoardDao {
   // Connection Pool 관리 DataSource 객체 선언
   private DataSource dataSource;
   
-  // Singleton pattern으로 BoardDao 객체 생성
+  // Singleton Pattern으로 BoardDao 객체 생성
   private static BoardDao dao = new BoardDao();
   private BoardDao() {
     // META-INF/context.xml에 있는 <Resource name="jdbc/oraclexe" /> 태그 내용을 읽어서 DataSource 객체 생성하기
@@ -50,25 +50,25 @@ public class BoardDao {
   // 게시글 등록 메소드
   public int register(BoardDto dto) {
     
-    // 등록 결과 (insert 실행 결과는 삽입된 행의 개수이다.)
+    // 등록 결과 선언 (insert 실행 결과는 삽입된 행의 개수이다.)
     int insertResult = 0;
     
     try {
       
       // Connection Pool에서 Connection을 하나 받아온다.
-      // connection Pool 관리는 DataSource 객체가 수행한다.
+      // Connection Pool 관리는 DataSource 객체가 수행한다.
       
       con = dataSource.getConnection();
       
-      // 쿼리문 작성
-      String sql = "INSERT INTO BOARD_T(BOARD_NO, TITLE, CONTENT, MODIFIED_AT, CREATED_AT) VALUES (BOARD_SEQ.NEXTVAL, ?, ?, sysdate, sysdate)";
-
+      // 쿼리문 작성 
+      String sql = "INSERT INTO BOARD_T(BOARD_NO, TITLE, CONTENT, MODIFIED_AT, CREATED_AT) VALUES (BOARD_SEQ.NEXTVAL, ?, ?, SYSDATE, SYSDATE)";
+      
       // ps 객체 생성 (쿼리문 실행을 담당하는 객체)
       ps = con.prepareStatement(sql);
       
       // 쿼리문의 변수(?로 처리된 부분)에 값을 전달
-      ps.setString(1, dto.getTitle());    // 1번째 물음표(?)에 dto.getTitle() 전달하기
-      ps.setString(2, dto.getContent());  // 2번째 물음표(?)에 dto.getContent() 전달하기ㄴ
+      ps.setString(1, dto.getTitle());   // 1번째 물음표(?)에 dto.getTitle() 전달하기
+      ps.setString(2, dto.getContent()); // 2번째 물음표(?)에 dto.getContent() 전달하기
       
       // 쿼리문의 실행
       insertResult = ps.executeUpdate();
@@ -82,7 +82,17 @@ public class BoardDao {
     // 등록 결과 반환
     return insertResult;
     
-    
   }
+  
+  
+  SELECT A.BOARD_NO, A.TITLE, A.CONTENT, A.MODIFIED_AT, A.CREATED_AT
+  FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOARD_NO DESC) AS RN, BOARD_NO, TITLE, CONTENT, MODIFIED_AT, CREATED_AT
+          FROM BOARD_T) A
+ WHERE A.RN BETWEEN 1 AND 2;
+  
+  
+  
+  
+  
   
 }
