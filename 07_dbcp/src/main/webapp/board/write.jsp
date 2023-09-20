@@ -11,10 +11,10 @@
 <script>
 
   $(function(){
-   // 함수 호출
+    // 함수 호출
     fnBoardList();
     fnBoardRegister();
-    })
+  })
 
   // 함수 정의
   function fnBoardList(){
