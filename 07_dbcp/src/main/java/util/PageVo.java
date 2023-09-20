@@ -48,5 +48,42 @@ public class PageVo {
     
   }
   
+  public String getPaging(String url) {
+    
+    // <a href="https://comic.naver.com/webtoon/list?page=1">1</a>
+    // <a href="https://comic.naver.com/webtoon/list?page=2">2</a>
+     
+    StringBuilder sb = new StringBuilder();
+    
+    sb.append("<div>");
+    
+    // 이전 블록
+    if(beginPage == 1) {
+      sb.append("<span>이전</span>");
+    } else {
+      sb.append("<a href=\"" + url + "?page=" + (beginPage - 1) + "\">이전</a>");
+    }
+    
+    // 페이지 번호
+    for(int p = beginPage; p <= endPage; p++) {
+      if(p == page) {
+        sb.append("<span>" + p + "</span>");
+      } else {
+        sb.append("<a href=\"" + url + "?page=" + p + "\">" + p + "</a>");
+      }
+    }
+    
+    // 다음 블록
+    if(endPage == totalPage) {
+      sb.append("<span>다음</span>");
+    } else {
+      sb.append("<a href=\"" + url + "?page=" + (endPage + 1) + "\">다음</a>");
+    }
+    
+    sb.append("</div>");
+    
+    return sb.toString();
+    
+  }
   
 }
