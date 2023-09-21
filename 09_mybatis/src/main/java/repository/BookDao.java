@@ -32,10 +32,13 @@ public class BookDao {
     return dao;     
   }
   
+  // 매퍼의 namespace
+  private final String NS = "mybatis.mapper.book.";
+  
   // 전체 개수 반환 메소드
   public int bookCount() {
     SqlSession ss = factory.openSession();
-    int count = ss.selectOne("mybatis.mapper.book.bookCount");
+    int count = ss.selectOne(NS + "bookCount");
     ss.close();
     return count;
   }
@@ -43,36 +46,51 @@ public class BookDao {
   // 목록 반환 메소드
   public List<BookDto> bookList(Map<String, Object> map) {
     SqlSession ss = factory.openSession();
-    List<BookDto> list = ss.selectList("mybatis.mapper.book.bookList", map);
+    List<BookDto> list = ss.selectList(NS + "bookList", map);
     ss.close();
     return list;
   }
   
   // 상세 반환 메소드
-  
+  public BookDto bookDetail(int bookNo) {
+    SqlSession ss = factory.openSession();
+    BookDto dto = ss.selectOne(NS + "bookDetail", bookNo);
+    ss.close();
+    return dto;
+  }
   
   // 등록 메소드
-  
+  public int bookAdd(BookDto dto) {
+    SqlSession ss = factory.openSession(false); // 내가 커밋하겠다.
+    int addResult = ss.insert(NS + "bookAdd", dto);
+    if(addResult == 1) {
+      ss.commit();
+    }
+    ss.close();
+    return addResult;
+  }
   
   // 수정 메소드
-  
-  
+  public int bookModify(BookDto dto) {
+    SqlSession ss = factory.openSession(false);
+    int modifyResult = ss.update(NS + "bookModify", dto);
+    if(modifyResult == 1) {
+      ss.commit();
+    }
+    ss.close();
+    return modifyResult;
+  }
+ 
+
   // 삭제 메소드
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  public int bookDelete(int bookNo) {
+    SqlSession ss = factory.openSession(false);
+    int deleteResult = ss.delete(NS + "bookDelete", bookNo);
+    if(deleteResult == 1) {
+      ss.commit();
+    }
+    ss.close();
+    return deleteResult;
+  }
+    
 }
