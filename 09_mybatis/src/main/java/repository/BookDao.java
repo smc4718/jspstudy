@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import domain.BookDto;
 
 public class BookDao {
-  
-  // mybatis에서 사용하는 SqlSession을 만들 수 있는 SqlSessionFactory 선언
+
+  // mybatis의 SqlSession을 만들 수 있는 SqlSessionFactory 선언
   private SqlSessionFactory factory;
   
   // Singleton Pattern
@@ -29,7 +29,7 @@ public class BookDao {
     }
   }
   public static BookDao getDao() {
-    return dao;     
+    return dao;
   }
   
   // 매퍼의 namespace
@@ -61,7 +61,7 @@ public class BookDao {
   
   // 등록 메소드
   public int bookAdd(BookDto dto) {
-    SqlSession ss = factory.openSession(false); // 내가 커밋하겠다.
+    SqlSession ss = factory.openSession(false);  // false : 내가 커밋하겠다.
     int addResult = ss.insert(NS + "bookAdd", dto);
     if(addResult == 1) {
       ss.commit();
@@ -80,8 +80,7 @@ public class BookDao {
     ss.close();
     return modifyResult;
   }
- 
-
+  
   // 삭제 메소드
   public int bookDelete(int bookNo) {
     SqlSession ss = factory.openSession(false);
@@ -92,5 +91,5 @@ public class BookDao {
     ss.close();
     return deleteResult;
   }
-    
+  
 }
