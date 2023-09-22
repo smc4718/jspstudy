@@ -16,4 +16,27 @@
       FROM MEMBER_T
   </select>
 
+  <insert id="memberAdd" parameterType="domain.MemberDto">
+    INSERT INTO MEMBER_T (
+      MEMBER_NO
+    , EMAIL
+    , NAME
+    , GENDER
+    , ADDRESS
+    ) VALUES (
+        MEMBER_SEQ.NEXTVAL
+    , #{email}
+    , #{name}
+    , #{gender}
+    , #{address}
+    )
+  </insert>
+
+
+
+
+
+
+
+
 </mapper>
