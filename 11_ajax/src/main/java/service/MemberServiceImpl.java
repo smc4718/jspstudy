@@ -82,36 +82,54 @@ public class MemberServiceImpl implements MemberService {
     
     MemberDto dto = dao.getMemberByEmail(email);
     
-    JSONObject obj = new JSONObject();          // { }
-    obj.put("member", new JSONObject(dto));     // {"member":{"memberNo":1,...}}
+    JSONObject obj = new JSONObject();       // { }
+    obj.put("member", new JSONObject(dto));  // {"member":{"memberNo":1,...}}
     
     PrintWriter out = response.getWriter();
     out.println(obj.toString());
     out.flush();
     out.close();
     
+  }
+  
+  @Override
+  public void memberModify(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+    MemberDto dto = MemberDto.builder()
+                      .email(request.getParameter("email"))
+                      .name(request.getParameter("name"))
+                      .gender(request.getParameter("gender"))
+                      .address(request.getParameter("address"))
+                      .memberNo(Integer.parseInt(request.getParameter("memberNo")))
+                      .build();
+    
+    int modifyResult = dao.memberModify(dto);
+    
+    JSONObject obj = new JSONObject();      // { }
+    obj.put("modifyResult", modifyResult);  // {"modifyResult":1}
+    
+    PrintWriter out = response.getWriter();
+    out.println(obj.toString());
+    out.flush();
+    out.close();
     
   }
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  @Override
+  public void memberDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+    
+    int deleteResult = dao.memberDelete(memberNo);
+    
+    JSONObject obj = new JSONObject();      // { }
+    obj.put("deleteResult", deleteResult);  // {"deleteResult":1}
+    
+    PrintWriter out = response.getWriter();
+    out.println(obj.toString());
+    out.flush();
+    out.close();
+    
+  }
   
 }

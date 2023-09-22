@@ -38,6 +38,12 @@ public class MemberController extends HttpServlet {
     case "/member/detail.do":
       memberService.memberDetail(request, response);
       break;
+    case "/member/modify.do":
+      memberService.memberModify(request, response);
+      break;
+    case "/member/delete.do":
+      memberService.memberDelete(request, response);
+      break;
     }
     
   }
