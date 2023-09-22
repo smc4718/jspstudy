@@ -15,6 +15,7 @@
     fnInit();
     fnMemberAdd();
     fnEmailCheck();
+    fnMemberDetail();
   })
 
   function fnMemberList(){
@@ -38,7 +39,7 @@
             str += '<td>' + elem.name + '</td>';
             str += '<td>' + (elem.gender === 'man' ? '남자' : (elem.gender === 'woman' ? '여자' : '선택안함')) + '</td>';
             str += '<td>' + elem.address + '</td>';
-            str += '<td><button>조회</button></td>';
+            str += '<td><button class="btn_detail" data-email="' + elem.email + '" >조회</button></td>';
             str += '</tr>';
             memberList.append(str);
           })
@@ -101,6 +102,24 @@
           } else {
             $('#msg_email').text('이미 등록된 이메일입니다.');
           }
+        }
+      })
+    })
+  }
+  
+  function fnMemberDetail(){
+    $(document).on('click', '.btn_detail', function(){
+      $.ajax({
+        type: 'get',
+        url: '${contextPath}/member/detail.do',
+        data: 'email=' + $(this).data('email'),
+        dataType: 'text',
+        success: function(resData){         // resData === '{"member":{"memberNo":1,...}}'
+          var obj = JSON.parse(resData);    // obj === {"member":{"memberNo":1,...}}
+          $('#email').val(obj.member.email);
+          $('#name').val(obj.member.name);
+          $(':radio[name=gender][value=' + obj.member.gender + ']').prop('checked', true);   
+          $('#address').val(obj.member.address);  
         }
       })
     })
