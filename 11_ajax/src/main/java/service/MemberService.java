@@ -8,5 +8,5 @@ import javax.servlet.http.HttpServletResponse;
 public interface MemberService {
   public void getMemberList(HttpServletResponse response) throws IOException;
   public void memberAdd(HttpServletRequest request, HttpServletResponse response) throws IOException;
-  
+  public void memberEmailCheck(HttpServletRequest request, HttpServletResponse response) throws IOException;
 }

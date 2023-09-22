@@ -18,19 +18,32 @@
 
   <insert id="memberAdd" parameterType="domain.MemberDto">
     INSERT INTO MEMBER_T (
-      MEMBER_NO
-    , EMAIL
-    , NAME
-    , GENDER
-    , ADDRESS
+        MEMBER_NO
+      , EMAIL
+      , NAME
+      , GENDER
+      , ADDRESS
     ) VALUES (
         MEMBER_SEQ.NEXTVAL
-    , #{email}
-    , #{name}
-    , #{gender}
-    , #{address}
+      , #{email}
+      , #{name}
+      , #{gender}
+      , #{address}
     )
   </insert>
+
+  <select id="getMemberByEmail" parameterType="String" resultType="domain.MemberDto">
+    SELECT MEMBER_NO, EMAIL, NAME, GENDER, ADDRESS
+      FROM MEMBER_T
+     WHERE EMAIL = #{email}
+  </select>
+
+
+
+
+
+
+
 
 
 

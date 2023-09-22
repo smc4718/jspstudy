@@ -38,13 +38,13 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public void memberAdd(HttpServletRequest request, HttpServletResponse response) throws IOException {
-   
+    
     MemberDto dto = MemberDto.builder()
-                       .email(request.getParameter("email"))
-                       .name(request.getParameter("name"))
-                       .gender(request.getParameter("gender"))
-                       .address(request.getParameter("address"))
-                       .build();
+                      .email(request.getParameter("email"))
+                      .name(request.getParameter("name"))
+                      .gender(request.getParameter("gender"))
+                      .address(request.getParameter("address"))
+                      .build();
     
     int addResult = dao.memberAdd(dto);
     
@@ -57,5 +57,45 @@ public class MemberServiceImpl implements MemberService {
     out.close();
     
   }
+  
+  @Override
+  public void memberEmailCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+    String email = request.getParameter("email");
+    
+    MemberDto dto = dao.getMemberByEmail(email);
+    
+    JSONObject obj = new JSONObject();  // { }
+    obj.put("ableEmail", dto == null);  // {"ableEmail":true}
+    
+    PrintWriter out = response.getWriter();
+    out.println(obj.toString());
+    out.flush();
+    out.close();
+    
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 }
